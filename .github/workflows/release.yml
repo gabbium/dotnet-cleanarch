@@ -29,17 +29,10 @@ jobs:
         with:
           dotnet-version: "9.0.x"
 
-      - name: Install semantic-release
-        run: |
-          npm install -g semantic-release \
-            @semantic-release/changelog \
-            @semantic-release/git \
-            @semantic-release/github \
-            @semantic-release/commit-analyzer \
-            @semantic-release/release-notes-generator \
-            execa
+      - name: Install dependencies
+        run: npm install
 
       - name: Run semantic-release
-        run: semantic-release
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
