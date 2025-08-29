@@ -11,11 +11,11 @@ A lightweight **.NET library** providing **Clean Architecture building blocks** 
 
 ## ✨ Features
 
-- ✅ **Result Pattern** for explicit success/failure handling
-- ✅ **Standardized Error Types** (`Failure`, `Validation`, `NotFound`, `Conflict`)
-- ✅ **CQRS Abstractions** (`ICommandHandler`, `IQueryHandler`)
-- ✅ **CQRS Behaviors** (`LoggingBehavior`, `ValidationBehavior`)
-- ✅ **Clean, dependency-free implementation**
+-   ✅ **Result Pattern** for explicit success/failure handling
+-   ✅ **Standardized Error Types** (`Failure`, `Validation`, `NotFound`, `Conflict`)
+-   ✅ **CQRS Abstractions** (`ICommandHandler`, `IQueryHandler`)
+-   ✅ **CQRS Behaviors** (`LoggingBehavior`, `ValidationBehavior`)
+-   ✅ **Clean, dependency-free implementation**
 
 ---
 
@@ -77,29 +77,29 @@ Each `ErrorType` communicates **why** an operation failed, without assuming how 
 
 ---
 
-- **Validation** → the request contains **invalid or missing fields**, or violates a **domain validation rule**.  
-  This category is intended for **multiple field-level errors** returned together.  
-  _Example:_ email format is invalid, required fields are missing, or a business invariant is broken.
+-   **Validation** → the request contains **invalid or missing fields**, or violates a **domain validation rule**.  
+    This category is intended for **multiple field-level errors** returned together.  
+    _Example:_ email format is invalid, required fields are missing, or a business invariant is broken.
 
-- **Problem** → a **known business rule** prevents the operation from succeeding, but it’s **not caused by invalid input**.  
-  This category is intended for a **single, well-defined business error**.  
-  _Example:_ attempting to deactivate the only remaining admin account, trying to process an order in a disallowed state.
+-   **Problem** → a **known business rule** prevents the operation from succeeding, but it’s **not caused by invalid input**.  
+    This category is intended for a **single, well-defined business error**.  
+    _Example:_ attempting to deactivate the only remaining admin account, trying to process an order in a disallowed state.
 
-- **NotFound** → the requested resource or entity **does not exist** or is **no longer available**.  
-  _Example:_ fetching a user by an ID that does not exist, looking up a deleted record.
+-   **NotFound** → the requested resource or entity **does not exist** or is **no longer available**.  
+    _Example:_ fetching a user by an ID that does not exist, looking up a deleted record.
 
-- **Conflict** → the operation is valid but **cannot proceed due to a conflicting state**.  
-  _Example:_ trying to register a user with an email that already exists, attempting to update an entity modified concurrently.
+-   **Conflict** → the operation is valid but **cannot proceed due to a conflicting state**.  
+    _Example:_ trying to register a user with an email that already exists, attempting to update an entity modified concurrently.
 
-- **Failure** → a **generic, unexpected error** that does not fit into any other category.  
-  _Example:_ unhandled exception, infrastructure failure, or unknown error.
+-   **Failure** → a **generic, unexpected error** that does not fit into any other category.  
+    _Example:_ unhandled exception, infrastructure failure, or unknown error.
 
 ---
 
-**Design intention:**  
+**Design intention:**
 
-- Use **Validation** when you need to return **multiple field errors at once**.  
-- Use **Problem** when you need to return **a single business rule violation**.  
+-   Use **Validation** when you need to return **multiple field errors at once**.
+-   Use **Problem** when you need to return **a single business rule violation**.
 
 These error types are **transport-agnostic** – they describe the **reason for failure** without coupling to how the error will be returned in a specific protocol (e.g., HTTP or gRPC).
 
@@ -109,15 +109,15 @@ These error types are **transport-agnostic** – they describe the **reason for 
 
 This project uses **[semantic-release](https://semantic-release.gitbook.io/semantic-release/)** for fully automated versioning:
 
-- **feat:** → minor version bump (0.x.0 → 0.(x+1).0)
-- **fix:** → patch version bump (0.0.x → 0.0.(x+1))
-- **feat!: / BREAKING CHANGE:** → major version bump (x.0.0 → (x+1).0.0)
+-   **feat:** → minor version bump (0.x.0 → 0.(x+1).0)
+-   **fix:** → patch version bump (0.0.x → 0.0.(x+1))
+-   **feat!: / BREAKING CHANGE:** → major version bump (x.0.0 → (x+1).0.0)
 
 Every merge into `main` automatically:
 
-- Updates `CHANGELOG.md`
-- Creates a GitHub release
-- Publishes a new version to NuGet
+-   Updates `CHANGELOG.md`
+-   Creates a GitHub release
+-   Publishes a new version to NuGet
 
 See all changes in the [CHANGELOG.md](./CHANGELOG.md).
 
