@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.1.0...v1.2.0) (2025-08-29)
+
+
+### Features
+
+* add paginated list ([#8](https://github.com/gabbium/dotnet-cleanarch/issues/8)) ([f927893](https://github.com/gabbium/dotnet-cleanarch/commit/f927893bb81d8aa1cc7f489825c55dbc430915e8))
+
 # [1.1.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.0.0...v1.1.0) (2025-08-29)
 
 
