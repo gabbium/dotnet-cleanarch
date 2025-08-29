@@ -10,30 +10,30 @@ We use **Conventional Commits** so semantic-release can automatically bump versi
 
 ### ✅ Examples
 
-- **feat:** adds a new feature → _minor version bump_
+-   **feat:** adds a new feature → _minor version bump_
 
-  ```
-  feat: add Result.Map extension method
-  ```
+    ```
+    feat: add Result.Map extension method
+    ```
 
-- **fix:** bug fix → _patch version bump_
+-   **fix:** bug fix → _patch version bump_
 
-  ```
-  fix: correct ErrorType serialization issue
-  ```
+    ```
+    fix: correct ErrorType serialization issue
+    ```
 
-- **feat!:** or add `BREAKING CHANGE:` in the body → _major version bump_
+-   **feat!:** or add `BREAKING CHANGE:` in the body → _major version bump_
 
-  ```
-  feat!: remove legacy CQRS interface
+    ```
+    feat!: remove legacy CQRS interface
 
-  BREAKING CHANGE: ICommand<T> was removed in favor of ICommandHandler<T>
-  ```
+    BREAKING CHANGE: ICommand<T> was removed in favor of ICommandHandler<T>
+    ```
 
 ### ❌ Avoid
 
-- Messages like `update stuff` or `fix bug`
-- Commits without context
+-   Messages like `update stuff` or `fix bug`
+-   Commits without context
 
 ---
 
@@ -41,10 +41,10 @@ We use **Conventional Commits** so semantic-release can automatically bump versi
 
 When you merge into **main**:
 
-- semantic-release will analyze commits
-- Decide the next version (patch/minor/major)
-- Update `CHANGELOG.md` automatically
-- Create a GitHub Release
+-   semantic-release will analyze commits
+-   Decide the next version (patch/minor/major)
+-   Update `CHANGELOG.md` automatically
+-   Create a GitHub Release
 
 No manual versioning or tagging is needed!
 
