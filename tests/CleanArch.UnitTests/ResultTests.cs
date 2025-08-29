@@ -3,7 +3,7 @@ namespace CleanArch.UnitTests;
 public class ResultTests
 {
     [Fact]
-    public void Constructor_WhenInvalidErrorCombination_ThenThrowsArgumentException()
+    public void Ctor_WhenInvalidErrorCombination_ThenThrowsArgumentException()
     {
         // Assert
         Assert.Throws<ArgumentException>(() => new Result(true, Error.Failure("X", "Y")));
@@ -11,7 +11,7 @@ public class ResultTests
     }
 
     [Fact]
-    public void Success_WhenCalled_ThenCreatesSuccessResult()
+    public void Success_CreatesSuccessResult()
     {
         // Act
         var result = Result.Success();
@@ -23,7 +23,7 @@ public class ResultTests
     }
 
     [Fact]
-    public void Success_WhenCalledWithValue_ThenCreatesSuccessResultWithValue()
+    public void Success_CreatesSuccessResultWithValue()
     {
         // Act
         var result = Result.Success("hello");
@@ -34,7 +34,7 @@ public class ResultTests
     }
 
     [Fact]
-    public void Failure_WhenCalled_ThenCreatesFailureResult()
+    public void Failure_CreatesFailureResult()
     {
         // Arrange
         var error = Error.Failure("FailureCode", "Something went wrong");
@@ -49,7 +49,7 @@ public class ResultTests
     }
 
     [Fact]
-    public void Failure_WhenCalledWithError_ThenCreatesFailureResult()
+    public void Failure_CreatesFailureResultWithError()
     {
         var error = Error.Problem("P", "Problem");
 
