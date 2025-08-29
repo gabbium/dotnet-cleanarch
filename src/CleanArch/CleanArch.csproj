@@ -9,7 +9,7 @@
   <PropertyGroup Label="Package info">
     <PackageId>Gabbium.CleanArch</PackageId>
     <PackageDescription>Clean Architecture building blocks: Result pattern, CQRS abstractions and a Specification + Repository pattern</PackageDescription>
-    <PackageTags>clean-architecture;result;cqrs;ddd</PackageTags>
+    <PackageTags>clean-architecture;result;cqrs;ddd;specification;repository</PackageTags>
     <Authors>Gabriel Abreu (@gabbium)</Authors>
     <PackageProjectUrl>https://github.com/gabbium/dotnet-cleanarch</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gabbium/dotnet-cleanarch</RepositoryUrl>
