@@ -14,7 +14,7 @@ public class SpecificationTests
         }
     }
 
-    private static readonly List<TestEntity> Data =
+    private static readonly List<TestEntity> s_data =
     [
         new("ABC", true),
         new("DEF", false),
@@ -24,20 +24,26 @@ public class SpecificationTests
     [Fact]
     public void DefaultCriteria_MatchesAll()
     {
+        // Arrange
         var spec = new AllTestEntitiesSpec();
 
-        var result = Data.Where(spec.Criteria.Compile()).ToList();
+        // Act
+        var result = s_data.Where(spec.Criteria.Compile()).ToList();
 
-        Assert.Equal(Data.Count, result.Count);
+        // Assert
+        Assert.Equal(s_data.Count, result.Count);
     }
 
     [Fact]
     public void DerivedSpec_FiltersCorrectly()
     {
+        // Arrange
         var spec = new ActiveTestEntitiesSpec();
 
-        var result = Data.Where(spec.Criteria.Compile()).ToList();
+        // Act
+        var result = s_data.Where(spec.Criteria.Compile()).ToList();
 
+        // Assert
         Assert.All(result, p => Assert.True(p.Active));
         Assert.Equal(2, result.Count);
     }
