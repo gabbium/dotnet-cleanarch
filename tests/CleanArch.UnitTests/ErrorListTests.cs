@@ -3,7 +3,7 @@ namespace CleanArch.UnitTests;
 public class ErrorListTests
 {
     [Fact]
-    public void Constructor_WhenCalled_ThenSetsPropertiesCorrectly()
+    public void Ctor_CreatesErrorList()
     {
         // Arrange
         var errors = new[]

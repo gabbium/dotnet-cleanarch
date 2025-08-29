@@ -3,7 +3,7 @@ namespace CleanArch.UnitTests;
 public class ErrorTests
 {
     [Fact]
-    public void Failure_WhenCalled_ThenCreatesFailureError()
+    public void Failure_CreatesFailureError()
     {
         // Act
         var error = Error.Failure("TestCode", "Test failure");
@@ -15,7 +15,7 @@ public class ErrorTests
     }
 
     [Fact]
-    public void Validation_WhenCalled_ThenCreatesValidationError()
+    public void Validation_CreatesValidationError()
     {
         // Act
         var error = Error.Validation("ValidationCode", "A validation error occurred");
@@ -27,7 +27,7 @@ public class ErrorTests
     }
 
     [Fact]
-    public void Problem_WhenCalled_ThenCreatesProblemError()
+    public void Problem_CreatesProblemError()
     {
         // Act
         var error = Error.Problem("ProblemCode", "A problem occurred");
@@ -39,7 +39,7 @@ public class ErrorTests
     }
 
     [Fact]
-    public void NotFound_WhenCalled_ThenCreatesNotFoundError()
+    public void NotFound_CreatesNotFoundError()
     {
         // Act
         var error = Error.NotFound("NotFoundCode", "Not found");
@@ -51,7 +51,7 @@ public class ErrorTests
     }
 
     [Fact]
-    public void Conflict_WhenCalled_ThenCreatesConflictError()
+    public void Conflict_CreatesConflictError()
     {
         // Act
         var error = Error.Conflict("ConflictCode", "Conflict found");
