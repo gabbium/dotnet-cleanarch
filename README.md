@@ -1,8 +1,8 @@
 # CleanArch
 
-![GitHub last commit](https://img.shields.io/github/last-commit/gabbium/dotnet-cleanarch)  
-![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/gabbium_dotnet-cleanarch?server=https%3A%2F%2Fsonarcloud.io)  
-![Sonar Coverage](https://img.shields.io/sonar/coverage/gabbium_dotnet-cleanarch?server=https%3A%2F%2Fsonarcloud.io)  
+![GitHub last commit](https://img.shields.io/github/last-commit/gabbium/dotnet-cleanarch)
+![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/gabbium_dotnet-cleanarch?server=https%3A%2F%2Fsonarcloud.io)
+![Sonar Coverage](https://img.shields.io/sonar/coverage/gabbium_dotnet-cleanarch?server=https%3A%2F%2Fsonarcloud.io)
 ![NuGet](https://img.shields.io/nuget/v/Gabbium.CleanArch)
 
 A lightweight **.NET library** providing **Clean Architecture building blocks** like a **Result pattern**, **CQRS abstractions** and a **Specification + Repository pattern**.
