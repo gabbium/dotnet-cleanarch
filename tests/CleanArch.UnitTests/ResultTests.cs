@@ -3,7 +3,7 @@ namespace CleanArch.UnitTests;
 public class ResultTests
 {
     [Fact]
-    public void Constructor_WhenInvalidErrorCombination_ThenThrowsArgumentException()
+    public void Ctor_WhenInvalidErrorCombination_ThenThrowsArgumentException()
     {
         // Assert
         Assert.Throws<ArgumentException>(() => new Result(true, Error.Failure("X", "Y")));
