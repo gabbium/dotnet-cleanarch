@@ -4,9 +4,9 @@ public class SpecificationTests
 {
     public record TestEntity(string Name, bool Active);
 
-    public sealed class AllTestEntitiesSpec : Specification<TestEntity> { }
+    public class AllTestEntitiesSpec : Specification<TestEntity> { }
 
-    public sealed class ActiveTestEntitiesSpec : Specification<TestEntity>
+    public class ActiveTestEntitiesSpec : Specification<TestEntity>
     {
         public ActiveTestEntitiesSpec()
         {
