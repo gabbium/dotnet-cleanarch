@@ -1,4 +1,4 @@
-namespace CleanArch.UnitTests;
+﻿namespace CleanArch.UnitTests;
 
 public class LoggingBehaviorCommandHandlerTests
 {
@@ -76,9 +76,9 @@ public class LoggingBehaviorCommandBaseHandlerTests
             .Setup(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(Result.Success());
 
-        var mockLogger = new Mock<ILogger<LoggingBehavior.CommandBaseHandler<TestCommand>>>();
+        var mockLogger = new Mock<ILogger<LoggingBehavior.CommandHandler<TestCommand>>>();
 
-        var handler = new LoggingBehavior.CommandBaseHandler<TestCommand>(
+        var handler = new LoggingBehavior.CommandHandler<TestCommand>(
             mockInnerHandler.Object,
             mockLogger.Object
         );
@@ -105,9 +105,9 @@ public class LoggingBehaviorCommandBaseHandlerTests
             .Setup(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(Result.Failure(error));
 
-        var mockLogger = new Mock<ILogger<LoggingBehavior.CommandBaseHandler<TestCommand>>>();
+        var mockLogger = new Mock<ILogger<LoggingBehavior.CommandHandler<TestCommand>>>();
 
-        var handler = new LoggingBehavior.CommandBaseHandler<TestCommand>(
+        var handler = new LoggingBehavior.CommandHandler<TestCommand>(
             mockInnerHandler.Object,
             mockLogger.Object
         );

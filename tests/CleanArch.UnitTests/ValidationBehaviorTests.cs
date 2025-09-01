@@ -1,4 +1,4 @@
-namespace CleanArch.UnitTests;
+﻿namespace CleanArch.UnitTests;
 
 public class ValidationBehaviorCommandHandlerTests
 {
@@ -111,7 +111,7 @@ public class ValidationBehaviorCommandBaseHandlerTests
             .Setup(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(Result.Success());
 
-        var handler = new ValidationBehavior.CommandBaseHandler<TestCommand>(
+        var handler = new ValidationBehavior.CommandHandler<TestCommand>(
             mockInnerHandler.Object,
             []
         );
@@ -138,7 +138,7 @@ public class ValidationBehaviorCommandBaseHandlerTests
 
         var mockInnerHandler = new Mock<ICommandHandler<TestCommand>>();
 
-        var handler = new ValidationBehavior.CommandBaseHandler<TestCommand>(
+        var handler = new ValidationBehavior.CommandHandler<TestCommand>(
             mockInnerHandler.Object,
             [mockValidator.Object]
         );
@@ -156,7 +156,6 @@ public class ValidationBehaviorCommandBaseHandlerTests
         mockInnerHandler.Verify(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 }
-
 
 public class ValidationBehaviorQueryHandlerTests
 {
@@ -221,4 +220,3 @@ public class ValidationBehaviorQueryHandlerTests
         mockInnerHandler.Verify(h => h.HandleAsync(It.IsAny<TestQuery>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 }
-
