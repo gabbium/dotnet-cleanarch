@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/gabbium/dotnet-cleanarch/compare/v1.3.0...v1.3.1) (2025-09-01)
+
+
+### Bug Fixes
+
+* add id generation for base entity ([#10](https://github.com/gabbium/dotnet-cleanarch/issues/10)) ([94b3cd2](https://github.com/gabbium/dotnet-cleanarch/commit/94b3cd2b5955ce9c4afbf7a9b4ee70df903e9d6d))
+
 # [1.3.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.2.0...v1.3.0) (2025-09-01)
 
 
