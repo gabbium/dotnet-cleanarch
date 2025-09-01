@@ -13,7 +13,7 @@ public class BaseEntityTests
         var entity = new TestEntity();
 
         // Assert
-        Assert.Equal(Guid.Empty, entity.Id);
+        Assert.NotEqual(Guid.Empty, entity.Id);
         Assert.Empty(entity.DomainEvents);
     }
 
