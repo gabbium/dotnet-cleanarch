@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.2.0...v1.3.0) (2025-09-01)
+
+
+### Features
+
+* remove repository pattern temporary + base entities + sender for commands/queries + events ([#9](https://github.com/gabbium/dotnet-cleanarch/issues/9)) ([4d2add5](https://github.com/gabbium/dotnet-cleanarch/commit/4d2add59274b48b0e5183469a450ea4c9eb0fa8b))
+
 # [1.2.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.1.0...v1.2.0) (2025-08-29)
 
 
