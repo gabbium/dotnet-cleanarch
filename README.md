@@ -5,7 +5,7 @@
 ![Sonar Coverage](https://img.shields.io/sonar/coverage/gabbium_dotnet-cleanarch?server=https%3A%2F%2Fsonarcloud.io)
 ![NuGet](https://img.shields.io/nuget/v/Gabbium.CleanArch)
 
-A lightweight **.NET library** providing **Clean Architecture building blocks** like a **Result pattern**, **CQRS abstractions** and a **Specification pattern**.
+A lightweight **.NET library** providing **Clean Architecture building blocks** like a **Result pattern**, **CQRS abstractions** and a **Repository pattern**.
 
 ---
 
@@ -14,8 +14,7 @@ A lightweight **.NET library** providing **Clean Architecture building blocks** 
 -   ✅ **Result Pattern** for explicit success/failure handling
 -   ✅ **Standardized Error Types** (`Failure`, `Validation`, `Problem`, `NotFound`, `Conflict`)
 -   ✅ **CQRS Abstractions** (`ICommandHandler`, `IQueryHandler`)
--   ✅ **Specification Pattern** (`ISpecification<T>`, `Specification<T>`)
--   ✅ **Unit of Work abstractions** (`IUnitOfWork`)
+-   ✅ **Repository & Unit of Work abstractions** (IRepository, IUnitOfWork)
 -   ✅ **Clean, dependency-free core implementation**
 
 ---
@@ -64,18 +63,6 @@ public class CreateUserHandler : ICommandHandler<CreateUserCommand>
     {
         // business logic...
         return Task.FromResult(Result.Success());
-    }
-}
-```
-
-**Specification**
-
-```csharp
-public sealed class ProductBySkuSpec(string sku) : Specification<Product>
-{
-    public ProductBySkuSpec : this(sku)
-    {
-        Criteria = p => p.Sku == sku;
     }
 }
 ```
