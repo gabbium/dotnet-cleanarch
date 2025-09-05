@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/gabbium/dotnet-cleanarch/compare/v1.4.1...v1.4.2) (2025-09-05)
+
+
+### Bug Fixes
+
+* nullable audit by props ([9898491](https://github.com/gabbium/dotnet-cleanarch/commit/98984918d3579f2cf3dc7a5b36d362abc6314bde))
+
 ## [1.4.1](https://github.com/gabbium/dotnet-cleanarch/compare/v1.4.0...v1.4.1) (2025-09-05)
 
 
