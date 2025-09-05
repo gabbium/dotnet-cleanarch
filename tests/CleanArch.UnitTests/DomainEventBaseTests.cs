@@ -11,6 +11,6 @@ public class DomainEventBaseTests
         var domainEvent = new TestDomainEvent();
 
         // Assert
-        Assert.NotEqual(DateTime.MinValue, domainEvent.OccurredOn);
+        Assert.NotEqual(DateTime.MinValue, domainEvent.Timestamp);
     }
 }
