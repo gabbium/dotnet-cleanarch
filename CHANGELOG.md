@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/gabbium/dotnet-cleanarch/compare/v1.4.0...v1.4.1) (2025-09-05)
+
+
+### Bug Fixes
+
+* auditable entity actor id to be guid + rename event date ([#12](https://github.com/gabbium/dotnet-cleanarch/issues/12)) ([c0b451c](https://github.com/gabbium/dotnet-cleanarch/commit/c0b451c91e1efdf5ecd0e68fc86891af2aa706de))
+
 # [1.4.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.3.1...v1.4.0) (2025-09-02)
 
 
