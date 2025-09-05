@@ -9,9 +9,9 @@ public class BaseAuditableEntityTests
     {
         // Arrange
         var createdOn = DateTimeOffset.UtcNow;
-        var createdBy = "User1";
+        var createdBy = Guid.NewGuid();
         var lastModifiedOn = DateTimeOffset.UtcNow;
-        var lastModifiedBy = "User2";
+        var lastModifiedBy = Guid.NewGuid();
 
         // Act
         var auditableEntity = new TestAuditableEntity
