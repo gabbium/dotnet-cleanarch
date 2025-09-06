@@ -9,18 +9,9 @@ public abstract class BaseEntity
     [NotMapped]
     public IReadOnlyCollection<DomainEventBase> DomainEvents => _domainEvents;
 
-    public void AddDomainEvent(DomainEventBase domainEvent)
-    {
-        _domainEvents.Add(domainEvent);
-    }
+    public void AddDomainEvent(DomainEventBase domainEvent) => _domainEvents.Add(domainEvent);
 
-    public void RemoveDomainEvent(DomainEventBase domainEvent)
-    {
-        _domainEvents.Remove(domainEvent);
-    }
+    public void RemoveDomainEvent(DomainEventBase domainEvent) => _domainEvents.Remove(domainEvent);
 
-    public void ClearDomainEvents()
-    {
-        _domainEvents.Clear();
-    }
+    public void ClearDomainEvents() => _domainEvents.Clear();
 }

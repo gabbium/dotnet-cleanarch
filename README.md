@@ -5,17 +5,15 @@
 ![Sonar Coverage](https://img.shields.io/sonar/coverage/gabbium_dotnet-cleanarch?server=https%3A%2F%2Fsonarcloud.io)
 ![NuGet](https://img.shields.io/nuget/v/Gabbium.CleanArch)
 
-A lightweight **.NET library** providing **Clean Architecture building blocks** like a **Result pattern**, **CQRS abstractions** and a **Repository pattern**.
+A lightweight **.NET library** providing **Clean Architecture building blocks** like a **Result pattern** and **CQRS abstractions**.
 
 ---
 
 ## ✨ Features
 
 -   ✅ **Result Pattern** for explicit success/failure handling
--   ✅ **Standardized Error Types** (`Failure`, `Validation`, `Problem`, `NotFound`, `Conflict`)
--   ✅ **CQRS Abstractions** (`ICommandHandler`, `IQueryHandler`)
--   ✅ **Repository & Unit of Work abstractions** (IRepository, IUnitOfWork)
--   ✅ **Clean, dependency-free core implementation**
+-   ✅ **Standardized Error Types** (`Validation`, `NotFound`, `Conflict`, `Unauthorized`, `Forbidden`, `Failure`, )
+-   ✅ **CQRS Abstractions** (`ICommand`, `IQuery`, `IDomainEvent`)
 
 ---
 
@@ -66,28 +64,6 @@ public class CreateUserHandler : ICommandHandler<CreateUserCommand>
     }
 }
 ```
-
----
-
-## 🧱 Error Types & Usage
-
-The library defines a **small, explicit set of error categories** to represent failures consistently across **domain**, **application**, and **infrastructure** layers.
-
-Each `ErrorType` communicates **why** an operation failed, without assuming how it will be presented (HTTP, gRPC, messaging, etc.).
-
--   **Validation** → request contains invalid/missing fields or violates a domain rule.
--   **Problem** → known business rule prevents the operation (not invalid input).
--   **NotFound** → entity or resource does not exist.
--   **Conflict** → valid operation but conflicting state prevents it.
--   **Failure** → unexpected/unhandled error.
-
-**Design intention:**
-
--   Use **Validation** when multiple field errors at once.
--   Use **Problem** when a single business rule violation.
--   Errors are **transport-agnostic** — describe the reason, not the protocol.
-
----
 
 ## 🪪 License
 

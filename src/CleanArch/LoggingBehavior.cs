@@ -1,12 +1,15 @@
-using Serilog.Context;
-
-namespace CleanArch;
+﻿namespace CleanArch;
 
 public static class LoggingBehavior
 {
-    public sealed class CommandHandler<TCommand>(ICommandHandler<TCommand> inner, ILogger<CommandHandler<TCommand>> logger) : ICommandHandler<TCommand> where TCommand : ICommand
+    public sealed class CommandHandler<TCommand>(
+        ICommandHandler<TCommand> inner,
+        ILogger<CommandHandler<TCommand>> logger)
+        : ICommandHandler<TCommand> where TCommand : ICommand
     {
-        public async Task<Result> HandleAsync(TCommand command, CancellationToken cancellationToken = default)
+        public async Task<Result> HandleAsync(
+            TCommand command,
+            CancellationToken cancellationToken = default)
         {
             var name = typeof(TCommand).Name;
 
@@ -15,50 +18,49 @@ public static class LoggingBehavior
             var result = await inner.HandleAsync(command, cancellationToken);
 
             if (result.IsSuccess)
-            {
                 logger.LogInformation("Completed command {CommandName}", name);
-            }
             else
-            {
-                using (LogContext.PushProperty("Error", result.Error, true))
-                {
-                    logger.LogError("Completed command {CommandName} with error", name);
-                }
-            }
+                logger.LogError("Completed command {CommandName} with error {Error}", name, result.Error);
 
             return result;
         }
     }
 
-    public sealed class CommandHandler<TCommand, TResponse>(ICommandHandler<TCommand, TResponse> inner, ILogger<CommandHandler<TCommand, TResponse>> logger) : ICommandHandler<TCommand, TResponse> where TCommand : ICommand<TResponse>
+    public sealed class CommandHandler<TCommand, TResponse>(
+        ICommandHandler<TCommand, TResponse> inner,
+        ILogger<CommandHandler<TCommand, TResponse>> logger)
+        : ICommandHandler<TCommand, TResponse> where TCommand : ICommand<TResponse>
     {
-        public async Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken = default)
+        public async Task<Result<TResponse>> HandleAsync(
+            TCommand command,
+            CancellationToken cancellationToken = default)
         {
             var name = typeof(TCommand).Name;
 
-            logger.LogInformation("Handling command {CommandName} {@Command}", name, command);
-
-            var result = await inner.HandleAsync(command, cancellationToken);
-
-            if (result.IsSuccess)
+            using (LogContext.PushProperty("CommandName", name))
             {
-                logger.LogInformation("Completed command {CommandName}", name);
-            }
-            else
-            {
-                using (LogContext.PushProperty("Error", result.Error, true))
-                {
-                    logger.LogError("Completed command {CommandName} with error", name);
-                }
-            }
+                logger.LogInformation("Handling command {@Command}", command);
 
-            return result;
+                var result = await inner.HandleAsync(command, cancellationToken);
+
+                if (result.IsSuccess)
+                    logger.LogInformation("Completed command successfully");
+                else
+                    logger.LogError("Completed command with error {@Error}", result.Error);
+
+                return result;
+            }
         }
     }
 
-    public sealed class QueryHandler<TQuery, TResponse>(IQueryHandler<TQuery, TResponse> inner, ILogger<QueryHandler<TQuery, TResponse>> logger) : IQueryHandler<TQuery, TResponse> where TQuery : IQuery<TResponse>
+    public sealed class QueryHandler<TQuery, TResponse>(
+        IQueryHandler<TQuery, TResponse> inner,
+        ILogger<QueryHandler<TQuery, TResponse>> logger)
+        : IQueryHandler<TQuery, TResponse> where TQuery : IQuery<TResponse>
     {
-        public async Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
+        public async Task<Result<TResponse>> HandleAsync(
+            TQuery query,
+            CancellationToken cancellationToken = default)
         {
             var name = typeof(TQuery).Name;
 
@@ -67,16 +69,9 @@ public static class LoggingBehavior
             var result = await inner.HandleAsync(query, cancellationToken);
 
             if (result.IsSuccess)
-            {
                 logger.LogInformation("Completed query {QueryName}", name);
-            }
             else
-            {
-                using (LogContext.PushProperty("Error", result.Error, true))
-                {
-                    logger.LogError("Completed query {QueryName} with error", name);
-                }
-            }
+                logger.LogError("Completed query {QueryName} with error {Error}", name, result.Error);
 
             return result;
         }
