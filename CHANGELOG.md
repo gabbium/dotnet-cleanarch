@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.4.2...v1.5.0) (2025-09-06)
+
+
+### Features
+
+* add new error types + domain exception + imediator ([#13](https://github.com/gabbium/dotnet-cleanarch/issues/13)) ([39ae627](https://github.com/gabbium/dotnet-cleanarch/commit/39ae6274b98015992888a09bf4d0d4afbc30ec4f))
+
 ## [1.4.2](https://github.com/gabbium/dotnet-cleanarch/compare/v1.4.1...v1.4.2) (2025-09-05)
 
 
