@@ -6,8 +6,8 @@ public class ResultTests
     public void Ctor_WhenInvalidErrorCombination_ThenThrowsArgumentException()
     {
         // Assert
-        Assert.Throws<ArgumentException>(() => new Result(true, Error.Failure("X", "Y")));
-        Assert.Throws<ArgumentException>(() => new Result(false, Error.None));
+        Assert.Throws<InvalidOperationException>(() => new Result(true, Error.Failure("Y")));
+        Assert.Throws<InvalidOperationException>(() => new Result(false, null));
     }
 
     [Fact]
@@ -19,14 +19,14 @@ public class ResultTests
         // Assert
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
-        Assert.Equal(Error.None, result.Error);
+        Assert.Null(result.Error);
     }
 
     [Fact]
     public void Success_CreatesSuccessResultWithValue()
     {
         // Act
-        var result = Result.Success("hello");
+        var result = Result<string>.Success("hello");
 
         // Assert
         Assert.True(result.IsSuccess);
@@ -37,7 +37,7 @@ public class ResultTests
     public void Failure_CreatesFailureResult()
     {
         // Arrange
-        var error = Error.Failure("FailureCode", "Something went wrong");
+        var error = Error.Failure("Something went wrong");
 
         // Act
         var result = Result.Failure(error);
@@ -51,10 +51,10 @@ public class ResultTests
     [Fact]
     public void Failure_CreatesFailureResultWithError()
     {
-        var error = Error.Problem("P", "Problem");
+        var error = Error.Failure("Failure");
 
         // Act
-        var result = Result.Failure<string>(error);
+        var result = Result<string>.Failure(error);
 
         // Assert
         Assert.False(result.IsSuccess);
@@ -63,7 +63,7 @@ public class ResultTests
     }
 
     [Fact]
-    public void ImplicitConversion_WhenValueIsNotNull_ThenCreatesSuccessResult()
+    public void ImplicitConversion_WhenValue_ThenCreatesSuccessResult()
     {
         // Act
         Result<string> result = "test";
@@ -74,13 +74,24 @@ public class ResultTests
     }
 
     [Fact]
-    public void ImplicitConversion_WhenValueIsNull_ThenCreatesFailureWithNullValueError()
+    public void ImplicitConversion_WhenError_ThenCreatesFailure()
     {
         // Act
-        Result<string> result = (string?)null;
+        Result result = Error.Failure("Failure");
 
         // Assert
         Assert.False(result.IsSuccess);
-        Assert.Equal(Error.NullValue, result.Error);
+        Assert.NotNull(result.Error);
+    }
+
+    [Fact]
+    public void ImplicitConversion_WhenValueButError_ThenCreatesFailure()
+    {
+        // Act
+        Result<string> result = Error.Failure("Failure");
+
+        // Assert
+        Assert.False(result.IsSuccess);
+        Assert.NotNull(result.Error);
     }
 }

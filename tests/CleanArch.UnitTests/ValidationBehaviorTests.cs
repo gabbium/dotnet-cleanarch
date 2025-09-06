@@ -11,7 +11,7 @@ public class ValidationBehaviorCommandHandlerTests
         var mockInnerHandler = new Mock<ICommandHandler<TestCommand, string>>();
         mockInnerHandler
             .Setup(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Success("OK"));
+            .ReturnsAsync(Result<string>.Success("OK"));
 
         var handler = new ValidationBehavior.CommandHandler<TestCommand, string>(
             mockInnerHandler.Object,
@@ -41,7 +41,7 @@ public class ValidationBehaviorCommandHandlerTests
         var mockInnerHandler = new Mock<ICommandHandler<TestCommand, string>>();
         mockInnerHandler
             .Setup(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Success("OK"));
+            .ReturnsAsync(Result<string>.Success("OK"));
 
         var handler = new ValidationBehavior.CommandHandler<TestCommand, string>(
             mockInnerHandler.Object,
@@ -88,12 +88,11 @@ public class ValidationBehaviorCommandHandlerTests
 
         // Assert
         Assert.False(result.IsSuccess);
-        Assert.IsType<ErrorList>(result.Error);
+        Assert.IsType<ValidationErrorList>(result.Error);
 
-        var errorList = (ErrorList)result.Error;
-        Assert.Equal("ValidationBehavior", errorList.Code);
+        var errorList = (ValidationErrorList)result.Error;
         Assert.Equal(ErrorType.Validation, errorList.Type);
-        Assert.Equal(2, errorList.Errors.Length);
+        Assert.Equal(2, errorList.Errors.Count);
 
         mockInnerHandler.Verify(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()), Times.Never);
     }
@@ -147,10 +146,9 @@ public class ValidationBehaviorCommandBaseHandlerTests
         var result = await handler.HandleAsync(command);
 
         Assert.False(result.IsSuccess);
-        Assert.IsType<ErrorList>(result.Error);
+        Assert.IsType<ValidationErrorList>(result.Error);
 
-        var errorList = (ErrorList)result.Error;
-        Assert.Equal("ValidationBehavior", errorList.Code);
+        var errorList = (ValidationErrorList)result.Error;
         Assert.Single(errorList.Errors);
 
         mockInnerHandler.Verify(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -172,7 +170,7 @@ public class ValidationBehaviorQueryHandlerTests
         var mockInnerHandler = new Mock<IQueryHandler<TestQuery, int>>();
         mockInnerHandler
             .Setup(h => h.HandleAsync(It.IsAny<TestQuery>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Success(42));
+            .ReturnsAsync(Result<int>.Success(42));
 
         var handler = new ValidationBehavior.QueryHandler<TestQuery, int>(
             mockInnerHandler.Object,
@@ -211,10 +209,9 @@ public class ValidationBehaviorQueryHandlerTests
         var result = await handler.HandleAsync(query);
 
         Assert.False(result.IsSuccess);
-        Assert.IsType<ErrorList>(result.Error);
+        Assert.IsType<ValidationErrorList>(result.Error);
 
-        var errorList = (ErrorList)result.Error;
-        Assert.Equal("ValidationBehavior", errorList.Code);
+        var errorList = (ValidationErrorList)result.Error;
         Assert.Single(errorList.Errors);
 
         mockInnerHandler.Verify(h => h.HandleAsync(It.IsAny<TestQuery>(), It.IsAny<CancellationToken>()), Times.Never);

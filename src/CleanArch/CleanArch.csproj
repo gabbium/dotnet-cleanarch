@@ -8,8 +8,8 @@
 
   <PropertyGroup Label="Package info">
     <PackageId>Gabbium.CleanArch</PackageId>
-    <PackageDescription>Clean Architecture building blocks: Result, Messaging and Repository pattern</PackageDescription>
-    <PackageTags>clean-architecture;result;messaging;ddd;repository</PackageTags>
+    <PackageDescription>Clean Architecture building blocks: Result and Messaging</PackageDescription>
+    <PackageTags>clean-architecture;result;messaging;ddd</PackageTags>
     <Authors>Gabriel Abreu (@gabbium)</Authors>
     <PackageProjectUrl>https://github.com/gabbium/dotnet-cleanarch</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gabbium/dotnet-cleanarch</RepositoryUrl>

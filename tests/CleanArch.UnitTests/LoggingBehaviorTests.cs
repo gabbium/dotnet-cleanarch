@@ -11,7 +11,7 @@ public class LoggingBehaviorCommandHandlerTests
         var mockInnerHandler = new Mock<ICommandHandler<TestCommand, string>>();
         mockInnerHandler
             .Setup(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Success("OK"));
+            .ReturnsAsync(Result<string>.Success("OK"));
 
         var mockLogger = new Mock<ILogger<LoggingBehavior.CommandHandler<TestCommand, string>>>();
 
@@ -36,12 +36,12 @@ public class LoggingBehaviorCommandHandlerTests
     public async Task HandleAsync_WhenFailure_ThenLogsStartAndError()
     {
         // Arrange
-        var error = Error.Failure("TestError", "Something failed");
+        var error = Error.Failure("Something failed");
 
         var mockInnerHandler = new Mock<ICommandHandler<TestCommand, string>>();
         mockInnerHandler
             .Setup(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Failure<string>(error));
+            .ReturnsAsync(Result<string>.Failure(error));
 
         var mockLogger = new Mock<ILogger<LoggingBehavior.CommandHandler<TestCommand, string>>>();
 
@@ -98,7 +98,7 @@ public class LoggingBehaviorCommandBaseHandlerTests
     public async Task HandleAsync_WhenFailure_ThenLogsError()
     {
         // Arrange
-        var error = Error.Failure("Err", "Failed");
+        var error = Error.Failure("Failed");
 
         var mockInnerHandler = new Mock<ICommandHandler<TestCommand>>();
         mockInnerHandler
@@ -134,7 +134,7 @@ public class LoggingBehaviorQueryHandlerTests
         var mockInnerHandler = new Mock<IQueryHandler<TestQuery, int>>();
         mockInnerHandler
             .Setup(h => h.HandleAsync(It.IsAny<TestQuery>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Success(42));
+            .ReturnsAsync(Result<int>.Success(42));
 
         var mockLogger = new Mock<ILogger<LoggingBehavior.QueryHandler<TestQuery, int>>>();
 
@@ -157,12 +157,12 @@ public class LoggingBehaviorQueryHandlerTests
     public async Task HandleAsync_WhenFailure_ThenLogsError()
     {
         // Arrange
-        var error = Error.Failure("Err", "Query failed");
+        var error = Error.Failure("Query failed");
 
         var mockInnerHandler = new Mock<IQueryHandler<TestQuery, int>>();
         mockInnerHandler
             .Setup(h => h.HandleAsync(It.IsAny<TestQuery>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Failure<int>(error));
+            .ReturnsAsync(Result<int>.Failure(error));
 
         var mockLogger = new Mock<ILogger<LoggingBehavior.QueryHandler<TestQuery, int>>>();
 

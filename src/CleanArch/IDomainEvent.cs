@@ -2,5 +2,5 @@
 
 public interface IDomainEvent
 {
-    DateTime Timestamp { get; }
+    DateTimeOffset Timestamp { get; }
 }
