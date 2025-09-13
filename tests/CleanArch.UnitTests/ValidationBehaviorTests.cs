@@ -24,8 +24,8 @@ public class ValidationBehaviorCommandHandlerTests
         var result = await handler.HandleAsync(command);
 
         // Assert
-        Assert.True(result.IsSuccess);
-        Assert.Equal("OK", result.Value);
+        result.IsSuccess.ShouldBeTrue();
+        result.Value.ShouldBe("OK");
         mockInnerHandler.Verify(h => h.HandleAsync(command, It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -54,8 +54,8 @@ public class ValidationBehaviorCommandHandlerTests
         var result = await handler.HandleAsync(command);
 
         // Assert
-        Assert.True(result.IsSuccess);
-        Assert.Equal("OK", result.Value);
+        result.IsSuccess.ShouldBeTrue();
+        result.Value.ShouldBe("OK");
         mockInnerHandler.Verify(h => h.HandleAsync(command, It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -87,12 +87,10 @@ public class ValidationBehaviorCommandHandlerTests
         var result = await handler.HandleAsync(command);
 
         // Assert
-        Assert.False(result.IsSuccess);
-        Assert.IsType<ValidationErrorList>(result.Error);
-
-        var errorList = (ValidationErrorList)result.Error;
-        Assert.Equal(ErrorType.Validation, errorList.Type);
-        Assert.Equal(2, errorList.Errors.Count);
+        result.IsSuccess.ShouldBeFalse();
+        var errorList = result.Error.ShouldBeOfType<ValidationErrorList>();
+        errorList.Type.ShouldBe(ErrorType.Validation);
+        errorList.Errors.Count.ShouldBe(2);
 
         mockInnerHandler.Verify(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()), Times.Never);
     }
@@ -105,6 +103,7 @@ public class ValidationBehaviorCommandBaseHandlerTests
     [Fact]
     public async Task HandleAsync_WhenNoValidators_ThenCallsInnerHandler()
     {
+        // Arrange
         var mockInnerHandler = new Mock<ICommandHandler<TestCommand>>();
         mockInnerHandler
             .Setup(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()))
@@ -116,15 +115,19 @@ public class ValidationBehaviorCommandBaseHandlerTests
         );
 
         var command = new TestCommand();
+
+        // Act
         var result = await handler.HandleAsync(command);
 
-        Assert.True(result.IsSuccess);
+        // Assert
+        result.IsSuccess.ShouldBeTrue();
         mockInnerHandler.Verify(h => h.HandleAsync(command, It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]
     public async Task HandleAsync_WhenValidationFails_ThenReturnsFailureAndSkipInnerHandler()
     {
+        // Arrange
         var failures = new[]
         {
             new ValidationFailure("Field", "Base Error") { ErrorCode = "BaseCode" }
@@ -143,13 +146,14 @@ public class ValidationBehaviorCommandBaseHandlerTests
         );
 
         var command = new TestCommand();
+
+        // Act
         var result = await handler.HandleAsync(command);
 
-        Assert.False(result.IsSuccess);
-        Assert.IsType<ValidationErrorList>(result.Error);
-
-        var errorList = (ValidationErrorList)result.Error;
-        Assert.Single(errorList.Errors);
+        // Assert
+        result.IsSuccess.ShouldBeFalse();
+        var errorList = result.Error.ShouldBeOfType<ValidationErrorList>();
+        errorList.Errors.Count.ShouldBe(1);
 
         mockInnerHandler.Verify(h => h.HandleAsync(It.IsAny<TestCommand>(), It.IsAny<CancellationToken>()), Times.Never);
     }
@@ -162,6 +166,7 @@ public class ValidationBehaviorQueryHandlerTests
     [Fact]
     public async Task HandleAsync_WhenValidationPasses_ThenCallsInnerHandler()
     {
+        // Arrange
         var mockValidator = new Mock<IValidator<TestQuery>>();
         mockValidator
             .Setup(v => v.ValidateAsync(It.IsAny<ValidationContext<TestQuery>>(), It.IsAny<CancellationToken>()))
@@ -178,16 +183,20 @@ public class ValidationBehaviorQueryHandlerTests
         );
 
         var query = new TestQuery("ok");
+
+        // Act
         var result = await handler.HandleAsync(query);
 
-        Assert.True(result.IsSuccess);
-        Assert.Equal(42, result.Value);
+        // Assert
+        result.IsSuccess.ShouldBeTrue();
+        result.Value.ShouldBe(42);
         mockInnerHandler.Verify(h => h.HandleAsync(query, It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]
     public async Task HandleAsync_WhenValidationFails_ThenReturnsFailureAndSkipInnerHandler()
     {
+        // Arrange
         var failures = new[]
         {
             new ValidationFailure("QueryField", "Invalid query") { ErrorCode = "QErr" }
@@ -206,13 +215,14 @@ public class ValidationBehaviorQueryHandlerTests
         );
 
         var query = new TestQuery("bad");
+
+        // Act
         var result = await handler.HandleAsync(query);
 
-        Assert.False(result.IsSuccess);
-        Assert.IsType<ValidationErrorList>(result.Error);
-
-        var errorList = (ValidationErrorList)result.Error;
-        Assert.Single(errorList.Errors);
+        // Assert
+        result.IsSuccess.ShouldBeFalse();
+        var errorList = result.Error.ShouldBeOfType<ValidationErrorList>();
+        errorList.Errors.Count.ShouldBe(1);
 
         mockInnerHandler.Verify(h => h.HandleAsync(It.IsAny<TestQuery>(), It.IsAny<CancellationToken>()), Times.Never);
     }

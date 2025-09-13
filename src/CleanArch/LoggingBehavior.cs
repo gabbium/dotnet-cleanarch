@@ -7,9 +7,7 @@ public static class LoggingBehavior
         ILogger<CommandHandler<TCommand>> logger)
         : ICommandHandler<TCommand> where TCommand : ICommand
     {
-        public async Task<Result> HandleAsync(
-            TCommand command,
-            CancellationToken cancellationToken = default)
+        public async Task<Result> HandleAsync(TCommand command, CancellationToken cancellationToken = default)
         {
             var name = typeof(TCommand).Name;
 
@@ -18,9 +16,13 @@ public static class LoggingBehavior
             var result = await inner.HandleAsync(command, cancellationToken);
 
             if (result.IsSuccess)
-                logger.LogInformation("Completed command {CommandName}", name);
+            {
+                logger.LogInformation("Handled command {CommandName}", name);
+            }
             else
-                logger.LogError("Completed command {CommandName} with error {Error}", name, result.Error);
+            {
+                logger.LogError("Command {CommandName} failed with error {@Error}", name, result.Error);
+            }
 
             return result;
         }
@@ -31,25 +33,24 @@ public static class LoggingBehavior
         ILogger<CommandHandler<TCommand, TResponse>> logger)
         : ICommandHandler<TCommand, TResponse> where TCommand : ICommand<TResponse>
     {
-        public async Task<Result<TResponse>> HandleAsync(
-            TCommand command,
-            CancellationToken cancellationToken = default)
+        public async Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken = default)
         {
             var name = typeof(TCommand).Name;
 
-            using (LogContext.PushProperty("CommandName", name))
+            logger.LogInformation("Handling command {CommandName} {@Command}", name, command);
+
+            var result = await inner.HandleAsync(command, cancellationToken);
+
+            if (result.IsSuccess)
             {
-                logger.LogInformation("Handling command {@Command}", command);
-
-                var result = await inner.HandleAsync(command, cancellationToken);
-
-                if (result.IsSuccess)
-                    logger.LogInformation("Completed command successfully");
-                else
-                    logger.LogError("Completed command with error {@Error}", result.Error);
-
-                return result;
+                logger.LogInformation("Handled command {CommandName} with response {@Response}", name, result.Value);
             }
+            else
+            {
+                logger.LogError("Command {CommandName} failed with error {@Error}", name, result.Error);
+            }
+
+            return result;
         }
     }
 
@@ -58,9 +59,7 @@ public static class LoggingBehavior
         ILogger<QueryHandler<TQuery, TResponse>> logger)
         : IQueryHandler<TQuery, TResponse> where TQuery : IQuery<TResponse>
     {
-        public async Task<Result<TResponse>> HandleAsync(
-            TQuery query,
-            CancellationToken cancellationToken = default)
+        public async Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
         {
             var name = typeof(TQuery).Name;
 
@@ -69,9 +68,13 @@ public static class LoggingBehavior
             var result = await inner.HandleAsync(query, cancellationToken);
 
             if (result.IsSuccess)
-                logger.LogInformation("Completed query {QueryName}", name);
+            {
+                logger.LogInformation("Handled query {QueryName} with response {@Response}", name, result.Value);
+            }
             else
-                logger.LogError("Completed query {QueryName} with error {Error}", name, result.Error);
+            {
+                logger.LogError("Query {QueryName} failed with error {@Error}", name, result.Error);
+            }
 
             return result;
         }

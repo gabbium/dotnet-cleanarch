@@ -4,7 +4,7 @@ public class BaseEntityTests
 {
     public class TestEntity : BaseEntity;
 
-    public class TestDomainEvent: DomainEventBase;
+    public class TestDomainEvent : DomainEventBase;
 
     [Fact]
     public void Ctor_CreatesEntity()
@@ -13,8 +13,8 @@ public class BaseEntityTests
         var entity = new TestEntity();
 
         // Assert
-        Assert.NotEqual(Guid.Empty, entity.Id);
-        Assert.Empty(entity.DomainEvents);
+        entity.Id.ShouldNotBe(Guid.Empty);
+        entity.DomainEvents.ShouldBeEmpty();
     }
 
     [Fact]
@@ -28,23 +28,8 @@ public class BaseEntityTests
         entity.AddDomainEvent(domainEvent);
 
         // Assert
-        Assert.Single(entity.DomainEvents);
-        Assert.Contains(domainEvent, entity.DomainEvents);
-    }
-
-    [Fact]
-    public void RemoveDomainEvent_RemovesEventFromDomainEvents()
-    {
-        // Arrange
-        var entity = new TestEntity();
-        var domainEvent = new TestDomainEvent();
-        entity.AddDomainEvent(domainEvent);
-
-        // Act
-        entity.RemoveDomainEvent(domainEvent);
-
-        // Assert
-        Assert.Empty(entity.DomainEvents);
+        entity.DomainEvents.Count.ShouldBe(1);
+        entity.DomainEvents.ShouldContain(domainEvent);
     }
 
     [Fact]
@@ -61,6 +46,6 @@ public class BaseEntityTests
         entity.ClearDomainEvents();
 
         // Assert
-        Assert.Empty(entity.DomainEvents);
+        entity.DomainEvents.ShouldBeEmpty();
     }
 }

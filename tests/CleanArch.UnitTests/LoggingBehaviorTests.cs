@@ -26,9 +26,8 @@ public class LoggingBehaviorCommandHandlerTests
         var result = await handler.HandleAsync(command);
 
         // Assert
-        Assert.True(result.IsSuccess);
-        Assert.Equal("OK", result.Value);
-
+        result.IsSuccess.ShouldBeTrue();
+        result.Value.ShouldBe("OK");
         mockInnerHandler.Verify(h => h.HandleAsync(command, It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -56,9 +55,8 @@ public class LoggingBehaviorCommandHandlerTests
         var result = await handler.HandleAsync(command);
 
         // Assert
-        Assert.False(result.IsSuccess);
-        Assert.Equal(error, result.Error);
-
+        result.IsSuccess.ShouldBeFalse();
+        result.Error.ShouldBe(error);
         mockInnerHandler.Verify(h => h.HandleAsync(command, It.IsAny<CancellationToken>()), Times.Once);
     }
 }
@@ -89,8 +87,7 @@ public class LoggingBehaviorCommandBaseHandlerTests
         var result = await handler.HandleAsync(command);
 
         // Assert
-        Assert.True(result.IsSuccess);
-
+        result.IsSuccess.ShouldBeTrue();
         mockInnerHandler.Verify(h => h.HandleAsync(command, It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -118,8 +115,8 @@ public class LoggingBehaviorCommandBaseHandlerTests
         var result = await handler.HandleAsync(command);
 
         // Assert
-        Assert.False(result.IsSuccess);
-        Assert.Equal(error, result.Error);
+        result.IsSuccess.ShouldBeFalse();
+        result.Error.ShouldBe(error);
     }
 }
 
@@ -149,8 +146,8 @@ public class LoggingBehaviorQueryHandlerTests
         var result = await handler.HandleAsync(query);
 
         // Assert
-        Assert.True(result.IsSuccess);
-        Assert.Equal(42, result.Value);
+        result.IsSuccess.ShouldBeTrue();
+        result.Value.ShouldBe(42);
     }
 
     [Fact]
@@ -177,7 +174,7 @@ public class LoggingBehaviorQueryHandlerTests
         var result = await handler.HandleAsync(query);
 
         // Assert
-        Assert.False(result.IsSuccess);
-        Assert.Equal(error, result.Error);
+        result.IsSuccess.ShouldBeFalse();
+        result.Error.ShouldBe(error);
     }
 }

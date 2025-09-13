@@ -6,11 +6,11 @@ public class ErrorTests
     public void Validation_CreatesValidationError()
     {
         // Act
-        var error = Error.Validation("A validation error occurred");
+        var error = Error.Validation("Validation");
 
         // Assert
-        Assert.Equal("A validation error occurred", error.Description);
-        Assert.Equal(ErrorType.Validation, error.Type);
+        error.Description.ShouldBe("Validation");
+        error.Type.ShouldBe(ErrorType.Validation);
     }
 
     [Fact]
@@ -20,8 +20,8 @@ public class ErrorTests
         var error = Error.NotFound("Not found");
 
         // Assert
-        Assert.Equal("Not found", error.Description);
-        Assert.Equal(ErrorType.NotFound, error.Type);
+        error.Description.ShouldBe("Not found");
+        error.Type.ShouldBe(ErrorType.NotFound);
     }
 
     [Fact]
@@ -31,8 +31,8 @@ public class ErrorTests
         var error = Error.Conflict("Conflict");
 
         // Assert
-        Assert.Equal("Conflict", error.Description);
-        Assert.Equal(ErrorType.Conflict, error.Type);
+        error.Description.ShouldBe("Conflict");
+        error.Type.ShouldBe(ErrorType.Conflict);
     }
 
     [Fact]
@@ -42,8 +42,8 @@ public class ErrorTests
         var error = Error.Unauthorized("Unauthorized");
 
         // Assert
-        Assert.Equal("Unauthorized", error.Description);
-        Assert.Equal(ErrorType.Unauthorized, error.Type);
+        error.Description.ShouldBe("Unauthorized");
+        error.Type.ShouldBe(ErrorType.Unauthorized);
     }
 
     [Fact]
@@ -53,18 +53,29 @@ public class ErrorTests
         var error = Error.Forbidden("Forbidden");
 
         // Assert
-        Assert.Equal("Forbidden", error.Description);
-        Assert.Equal(ErrorType.Forbidden, error.Type);
+        error.Description.ShouldBe("Forbidden");
+        error.Type.ShouldBe(ErrorType.Forbidden);
+    }
+
+    [Fact]
+    public void Business_CreatesBusinessError()
+    {
+        // Act
+        var error = Error.Business("Business");
+
+        // Assert
+        error.Description.ShouldBe("Business");
+        error.Type.ShouldBe(ErrorType.Business);
     }
 
     [Fact]
     public void Failure_CreatesFailureError()
     {
         // Act
-        var error = Error.Failure("Test failure");
+        var error = Error.Failure("Failure");
 
         // Assert
-        Assert.Equal("Test failure", error.Description);
-        Assert.Equal(ErrorType.Failure, error.Type);
+        error.Description.ShouldBe("Failure");
+        error.Type.ShouldBe(ErrorType.Failure);
     }
 }
