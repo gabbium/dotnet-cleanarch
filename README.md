@@ -12,7 +12,7 @@ A lightweight **.NET library** providing **Clean Architecture building blocks** 
 ## ✨ Features
 
 -   ✅ **Result Pattern** for explicit success/failure handling
--   ✅ **Standardized Error Types** (`Validation`, `NotFound`, `Conflict`, `Unauthorized`, `Forbidden`, `Failure`, )
+-   ✅ **Standardized Error Types** (`Validation`, `NotFound`, `Conflict`, `Unauthorized`, `Forbidden`, `Business`, `Failure` )
 -   ✅ **CQRS Abstractions** (`ICommand`, `IQuery`, `IDomainEvent`)
 
 ---
