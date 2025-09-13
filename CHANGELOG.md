@@ -1,3 +1,13 @@
+## [2.0.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.5.0...v2.0.0) (2025-09-13)
+
+### ⚠ BREAKING CHANGES
+
+* new result + mediator/domain event publisher + iaggregate and repository + better behaviors (#14)
+
+### Features
+
+* new result + mediator/domain event publisher + iaggregate and repository + better behaviors ([#14](https://github.com/gabbium/dotnet-cleanarch/issues/14)) ([2c60586](https://github.com/gabbium/dotnet-cleanarch/commit/2c605866bb6ab7237ac8827b6f2e871c0fb8d2d1))
+
 # [1.5.0](https://github.com/gabbium/dotnet-cleanarch/compare/v1.4.2...v1.5.0) (2025-09-06)
 
 
