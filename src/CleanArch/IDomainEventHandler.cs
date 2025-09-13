@@ -1,6 +1,6 @@
 ﻿namespace CleanArch;
 
-public interface IDomainEventHandler<in TEvent> where TEvent : IDomainEvent
+public interface IDomainEventHandler<in TDomainEvent> where TDomainEvent : IDomainEvent
 {
-    Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
+    Task HandleAsync(TDomainEvent domainEvent, CancellationToken cancellationToken = default);
 }

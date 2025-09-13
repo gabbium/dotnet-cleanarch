@@ -15,12 +15,12 @@ public class PaginatedListTests
         var paged = new PaginatedList<string>(items, totalItems, pageNumber, pageSize);
 
         // Assert
-        Assert.Equal(items, paged.Items);
-        Assert.Equal(totalItems, paged.TotalItems);
-        Assert.Equal(pageNumber, paged.PageNumber);
-        Assert.Equal(pageSize, paged.PageSize);
-        Assert.Equal(5, paged.TotalPages);
-        Assert.True(paged.HasPreviousPage);
-        Assert.True(paged.HasNextPage);
+        paged.Items.ShouldBe(items);
+        paged.TotalItems.ShouldBe(totalItems);
+        paged.PageNumber.ShouldBe(pageNumber);
+        paged.PageSize.ShouldBe(pageSize);
+        paged.TotalPages.ShouldBe(5);
+        paged.HasPreviousPage.ShouldBeTrue();
+        paged.HasNextPage.ShouldBeTrue();
     }
 }

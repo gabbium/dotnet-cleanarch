@@ -6,8 +6,8 @@ public class ResultTests
     public void Ctor_WhenInvalidErrorCombination_ThenThrowsArgumentException()
     {
         // Assert
-        Assert.Throws<InvalidOperationException>(() => new Result(true, Error.Failure("Y")));
-        Assert.Throws<InvalidOperationException>(() => new Result(false, null));
+        Should.Throw<InvalidOperationException>(() => new Result(true, Error.Failure("Y")));
+        Should.Throw<InvalidOperationException>(() => new Result(false, null));
     }
 
     [Fact]
@@ -17,9 +17,9 @@ public class ResultTests
         var result = Result.Success();
 
         // Assert
-        Assert.True(result.IsSuccess);
-        Assert.False(result.IsFailure);
-        Assert.Null(result.Error);
+        result.IsSuccess.ShouldBeTrue();
+        result.IsFailure.ShouldBeFalse();
+        result.Error.ShouldBeNull();
     }
 
     [Fact]
@@ -29,8 +29,8 @@ public class ResultTests
         var result = Result<string>.Success("hello");
 
         // Assert
-        Assert.True(result.IsSuccess);
-        Assert.Equal("hello", result.Value);
+        result.IsSuccess.ShouldBeTrue();
+        result.Value.ShouldBe("hello");
     }
 
     [Fact]
@@ -43,23 +43,24 @@ public class ResultTests
         var result = Result.Failure(error);
 
         // Assert
-        Assert.False(result.IsSuccess);
-        Assert.True(result.IsFailure);
-        Assert.Equal(error, result.Error);
+        result.IsSuccess.ShouldBeFalse();
+        result.IsFailure.ShouldBeTrue();
+        result.Error.ShouldBe(error);
     }
 
     [Fact]
     public void Failure_CreatesFailureResultWithError()
     {
+        // Arrange
         var error = Error.Failure("Failure");
 
         // Act
         var result = Result<string>.Failure(error);
 
         // Assert
-        Assert.False(result.IsSuccess);
-        Assert.Equal(error, result.Error);
-        Assert.Throws<InvalidOperationException>(() => _ = result.Value);
+        result.IsSuccess.ShouldBeFalse();
+        result.Error.ShouldBe(error);
+        result.Value.ShouldBeNull();
     }
 
     [Fact]
@@ -69,8 +70,8 @@ public class ResultTests
         Result<string> result = "test";
 
         // Assert
-        Assert.True(result.IsSuccess);
-        Assert.Equal("test", result.Value);
+        result.IsSuccess.ShouldBeTrue();
+        result.Value.ShouldBe("test");
     }
 
     [Fact]
@@ -80,8 +81,8 @@ public class ResultTests
         Result result = Error.Failure("Failure");
 
         // Assert
-        Assert.False(result.IsSuccess);
-        Assert.NotNull(result.Error);
+        result.IsSuccess.ShouldBeFalse();
+        result.Error.ShouldNotBeNull();
     }
 
     [Fact]
@@ -91,7 +92,7 @@ public class ResultTests
         Result<string> result = Error.Failure("Failure");
 
         // Assert
-        Assert.False(result.IsSuccess);
-        Assert.NotNull(result.Error);
+        result.IsSuccess.ShouldBeFalse();
+        result.Error.ShouldNotBeNull();
     }
 }
